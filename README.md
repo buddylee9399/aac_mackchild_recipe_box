@@ -13,39 +13,49 @@ gem 'devise'
 gem 'aws-sdk'
 # gem 'paperclip', '~> 4.2.0'
 ```
+- didnt use aws-sdk
+- used haml instead of erb
 - sass rails for .scss files
 - image processing for storage
+- used simple form
 - no paperclip needed
 - i didnt use bootstrap sass
 - devise set for turbo, rails 7
 - from: https://dev.to/efocoder/how-to-use-devise-with-turbo-in-rails-7-9n9
+- haml for devise links
+
+```
+      - if user_signed_in?
+        %ul.nav.navbar-nav.navbar-right
+          %li= link_to "New Recipe", new_recipe_path
+          %li= link_to "Sign Out", destroy_user_session_path, method: :delete
+      - else
+        %ul.nav.navbar-nav.navbar-right
+          %li= link_to "Sign Up", new_user_registration_path
+          %li= link_to "Sign In", new_user_session_path
+
+```
+
+### using cocoon with rails 7
+- added jquery with cdn - https://releases.jquery.com/
+- in app.js added this code to see if jquery was working, and it was
+```
+if(jQuery) alert('jQuery is loaded');
+```
+
+- followed these instructions to get it working: https://stackoverflow.com/questions/71645732/cocoon-gem-issue-in-rails-7
 
 ## MODELS
-- devise user
-- posts scaffold
-- comment belongs to post added to a do block in routes, with posts
-- validations for posts
+- devise user: has many recipes
+- recipes: belongs to user, has ingredients, has directions, accepts nested attributes via cocoon
+- validation
 
 ```
-	validates :title, presence: true, length: {minimum: 5}
-	validates :body,  presence: true
+validates :title, :description, :image, presence: true
 ```
+- attached an image
 
 ## OTHER
 - he did his own styling
-- used normalize.css
-- added favicon
-- added a 'mailto' link
-- did an svg logo
-- image in the about page
-- if current_page?
+- views are in haml
 
-```
-      <% if current_page?(root_path) %>
-        <p>All Posts</p>
-      <% elsif current_page?(about_path) %>
-        <p>About</p>
-      <% else %>
-        <%= link_to "Back to All Posts", root_path %>
-      <% end %>
-```

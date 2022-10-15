@@ -64,7 +64,7 @@ body {
   margin-bottom: 40px;
   @include box-shadow;
   .image_wrapper {
-    max-width: 100%;
+    max-width: 20%;
     border-radius: 5px 5px 0 0;
     overflow: hidden;
   }
@@ -103,7 +103,7 @@ body {
 }
 
 .recipe_image {
-  max-width: 100%;
+  max-width: 50%;
   border-radius: 5px;
   @include box-shadow;
 }
